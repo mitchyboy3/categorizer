@@ -4,6 +4,14 @@ import "./NewChart.css";
 
 export default class NewChart extends Component {
 	static propTypes = { createChart: PropTypes.func.isRequired };
+	constructor (props){
+		super(props);
+		this.state = {
+			labels: {},
+			name: '',
+			newLabel: ''
+		}
+	}
 
 	render() {
 		return (

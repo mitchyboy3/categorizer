@@ -6,8 +6,17 @@ import NewChart from "./NewChart/NewChart";
 import Sidebar from "./Sidebar/Sidebar";
 import AddDataset from "./AddDataset/AddDataset";
 
+import { connect } from 'react-redux';
+import createChart from '../ducks/chart.js';
+
+
 class App extends Component {
 	render() {
+		const {
+			activeChart,
+			charts,
+			createChart
+		} = this.props; 
 		return (
 			<div className="app">
 				<Sidebar />
@@ -16,7 +25,7 @@ class App extends Component {
 						<h1 className="app__title">Categorizer</h1>
 
 						<div className="app__new-chart">
-							<NewChart />
+							<NewChart createChart={createChart}/>
 						</div>
 					</header>
           <div className="app__active-chart">
@@ -28,4 +37,11 @@ class App extends Component {
 	}
 }
 
-export default App;
+function mapStateToProps( { activeChartIndex, charts } ){
+	return {
+		activeChartIndex: charts [activeChartIndex],
+		charts: charts
+	}
+}
+
+export default connect(mapStateToProps , { createChart })(App);
